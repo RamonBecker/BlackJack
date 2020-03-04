@@ -1,4 +1,4 @@
-package com.example.blackjack;
+package com.example.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -5,4 +5,8 @@
     <string name="login">Login</string>
     <string name="password">Password:</string>
     <string name="digite_o_usu_rio">Digite o usuário</string>
+    <string name="register_user">Register User</string>
+    <string name="digite_a_senha">Digite a senha</string>
+    <string name="e_mail">E-mail:</string>
+    <string name="digite_o_e_mail">Digite o e-mail</string>
 </resources>
