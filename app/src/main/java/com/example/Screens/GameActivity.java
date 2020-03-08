@@ -1,5 +1,6 @@
 package com.example.Screens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,12 +37,22 @@ public class GameActivity extends BasicMenuAcitivy {
     private int playsUser = 0;
     private int playsComputer = 0;
 
+
+    // Controller of indice image
     private int contImageViewUser = 2;
     private int contImageViewComputer = 0;
 
-    private User user;
 
+    // References
+    private User user;
     private Game game;
+
+
+    //Controller of wins and loss user
+    public static int win = 0;
+    public static int loss = 0;
+
+    private int idImageComputerVisibleFinal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,26 +129,87 @@ public class GameActivity extends BasicMenuAcitivy {
         actionButtonHold(null);
         actionButtonHold(null);
 
-        Log.i("ganhador", String.valueOf(game.resultGame(playsUser, playsComputer)));
 
-        setTextWinLoss();
+        //checkPlayerWin();
+       setTextWinLoss();
     }
 
 
+    private void checkPlayerWin() {
+        Game game = new Game();
+
+        Log.i("blackjack Jogodas:", "User:" + String.valueOf(playsUser) + " PC:" + String.valueOf(playsComputer));
+
+        Log.i("Retorno", "User:" + String.valueOf((game.resultGame(playsUser,playsComputer))));
+        int resultGame = game.resultGame(playsUser,playsComputer);
+        Log.i("Result", "User:" + String.valueOf(resultGame));
+
+        if (resultGame == 0) {
+            win++;
+            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
+            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+            Toast.makeText(this, "Voce fez BlackJack", Toast.LENGTH_LONG).show();
+            Game.checkStand = false;
+            restartGame();
+        } else if (resultGame == 1) {
+            loss++;
+            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
+            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+
+            Toast.makeText(this, "Empate", Toast.LENGTH_LONG).show();
+            Game.checkStand = false;
+            restartGame();
+        } else if (resultGame == 2) {
+
+            loss++;
+            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
+            Toast.makeText(this, "A mesa ganhou", Toast.LENGTH_SHORT).show();
+            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+            Game.checkStand = false;
+            restartGame();
+
+        } else if (resultGame == 3) {
+
+            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
+            Toast.makeText(this, "Empate, voce e a mesa estouraram", Toast.LENGTH_SHORT).show();
+            Game.checkStand = false;
+            restartGame();
+        }
+        else if(resultGame == 4){
+            loss++;
+            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
+            Toast.makeText(this, "Voce estourou", Toast.LENGTH_SHORT).show();
+            Game.checkStand = false;
+            restartGame();
+        }
+
+    }
+
+    private void restartGame() {
+
+        Intent it = new Intent(this, GameActivity.class);
+        startActivity(it);
+        finish();
+    }
+
     public void actionStand(View view) {
+
         buttonHint.setEnabled(false);
         Game.checkStand = true;
 
         listCards.get(0).setVisibility(View.VISIBLE);
-        Log.i("USER:", String.valueOf(playsUser));
-        Log.i("PC:", String.valueOf(playsComputer));
-        Log.i("ganhador", String.valueOf(game.resultGame(playsUser, playsComputer)));
-        Log.i("user", user.toString());
+
+
+        checkPlayerWin();
         setTextWinLoss();
+
+        Log.i("user", user.toString());
 
     }
 
-    private void setTextWinLoss(){
+    private void setTextWinLoss() {
         contLoss.setText(String.valueOf(user.getLoss()));
         contWin.setText(String.valueOf(user.getWin()));
     }
@@ -166,8 +238,12 @@ public class GameActivity extends BasicMenuAcitivy {
         }
 
         contSumCards.setText(String.valueOf(playsUser));
+
+
+        checkPlayerWin();
         setTextWinLoss();
-        Log.i("ganhador", String.valueOf(game.resultGame(playsUser, playsComputer)));
+
+        //Log.i("ganhador", String.valueOf(game.resultGame(playsUser, playsComputer)));
     }
 
 
@@ -181,7 +257,7 @@ public class GameActivity extends BasicMenuAcitivy {
                 listCards.get(1).setImageResource(listIdCards.get(i));
             }
         }
-
+        idImageComputerVisibleFinal = id1;
         if (id1 >= 10) {
             playsComputer += 10;
         } else {

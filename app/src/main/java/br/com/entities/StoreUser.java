@@ -2,6 +2,8 @@ package br.com.entities;
 
 import android.util.Log;
 
+import com.example.Screens.GameActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +15,13 @@ public class StoreUser {
 
     private StoreUser() {
         this.listUser = new ArrayList<>();
+        listUser.add(new User("admin", "admin", "admin", "admin"));
     }
 
     public static StoreUser getInstance() {
         if (storeUser == null) {
             storeUser = new StoreUser();
+
         }
         return storeUser;
     }
@@ -59,12 +63,32 @@ public class StoreUser {
     public User checkLoginUserActive(String userName, String password) {
         User userReturn = null;
         for (User user : listUser) {
-            if (user.getNameUser().equals(userName.trim()) && user.getPassword().equals(password.trim())) {
+            if (user.getNameUser().contentEquals(userName.trim()) && user.getPassword().contentEquals(password.trim())) {
                 user.setActive(true);
                 userReturn = user;
             }
         }
+        GameActivity.win = userReturn.getWin();
+        GameActivity.loss = userReturn.getLoss();
+
         return userReturn;
+    }
+
+    public User updateWinLoss(User user, int win, int loss) {
+        User userFound = null;
+        for (User userSeach : listUser) {
+            if (user.getName() == userSeach.getName() && user.getPassword() == userSeach.getPassword()) {
+                userFound = userSeach;
+                break;
+            }
+        }
+
+        if (userFound != null) {
+            userFound.setWin(win);
+            userFound.setLoss(loss);
+        }
+
+        return userFound;
     }
 
     public User checkIsActive() {
@@ -74,5 +98,11 @@ public class StoreUser {
             }
         }
         return null;
+    }
+
+    public void logoffUser() {
+        for (User user : listUser) {
+            user.setActive(false);
+        }
     }
 }

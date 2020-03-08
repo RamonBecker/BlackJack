@@ -1,5 +1,6 @@
 package com.example.Screens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,11 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import br.com.entities.StoreUser;
+
 public class BasicMenuAcitivy extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
 
     }
@@ -29,10 +32,11 @@ public class BasicMenuAcitivy extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.menuConfiguracoes:
-                Toast.makeText(this, R.string.configuracoes,Toast.LENGTH_SHORT).show();
-                break;
-            case android.R.id.home:
+                StoreUser.getInstance().logoffUser();
+                Intent it = new Intent(this, LoginActivity.class);
+                startActivity(it);
                 finish();
+                break;
         }
 
         return super.onOptionsItemSelected(item);

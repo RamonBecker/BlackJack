@@ -1,5 +1,6 @@
 package com.example.Screens;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -57,6 +58,8 @@ public class ScreenRegister extends AppCompatActivity {
             txtPassword.setText("");
             txtNameUser.setText("");
             txtEmail.setText("");
+            Intent it = new Intent(this, LoginActivity.class);
+            startActivity(it);
             finish();
 
         } catch (Exception e) {

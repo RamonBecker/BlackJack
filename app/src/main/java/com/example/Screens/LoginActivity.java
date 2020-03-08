@@ -34,14 +34,14 @@ public class LoginActivity extends AppCompatActivity {
     public void actionScreenRegisterUser(View v) {
         Intent it = new Intent(this, ScreenRegister.class);
         startActivity(it);
-        //finish();
+        finish();
     }
 
     public void actionButtonLogin(View view) {
         StoreUser storeUser = StoreUser.getInstance();
 
 
-        storeUser.addUser(new User("admin", "admin", "admin", "admin"));
+        //storeUser.addUser(new User("admin", "admin", "admin", "admin"));
         String nameUser = txtUserName.getText().toString();
         String password = txtPassword.getText().toString();
 
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             storeUser.checkLoginUserActive(txtUserName.getText().toString(), txtPassword.getText().toString());
             Intent it = new Intent(this, GameActivity.class);
             startActivity(it);
-
+            finish();
 
         } else {
             Toast.makeText(this, R.string.usuario_senha_invalidos, Toast.LENGTH_LONG).show();
