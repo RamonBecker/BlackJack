@@ -5,6 +5,9 @@ public class User {
     private String nameUser;
     private String password;
     private String email;
+    private boolean isActive;
+    private int win;
+    private int loss;
 
     public User(String name, String password, String nameUser, String email) {
         if (name == null || name.isEmpty()) {
@@ -20,8 +23,8 @@ public class User {
             throw new IllegalArgumentException("O email não pode ser vazio");
         }
 
-        if(nameUser == null || nameUser.isEmpty()){
-            throw  new IllegalArgumentException("O nome do usuário não pode ser vazio");
+        if (nameUser == null || nameUser.isEmpty()) {
+            throw new IllegalArgumentException("O nome do usuário não pode ser vazio");
         }
 
         this.name = name;
@@ -69,12 +72,35 @@ public class User {
 
     public void setNameUser(String nameUser) {
 
-        if(nameUser == null || nameUser.isEmpty()){
-            throw  new IllegalArgumentException("O nome do usuário não pode ser vazio");
+        if (nameUser == null || nameUser.isEmpty()) {
+            throw new IllegalArgumentException("O nome do usuário não pode ser vazio");
         }
         this.nameUser = nameUser;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public int getWin() {
+        return win;
+    }
+
+    public void setWin(int win) {
+        this.win = win;
+    }
+
+    public int getLoss() {
+        return loss;
+    }
+
+    public void setLoss(int loss) {
+        this.loss = loss;
+    }
 
     @Override
     public String toString() {

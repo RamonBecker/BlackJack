@@ -43,15 +43,36 @@ public class StoreUser {
 
     public boolean login(String userName, String password) {
 
-        if(listUser == null){
+        if (listUser == null) {
             return false;
         }
 
         for (User user : listUser) {
             if (user.getNameUser().equals(userName.trim()) && user.getPassword().equals(password.trim())) {
+
                 return true;
             }
         }
         return false;
+    }
+
+    public User checkLoginUserActive(String userName, String password) {
+        User userReturn = null;
+        for (User user : listUser) {
+            if (user.getNameUser().equals(userName.trim()) && user.getPassword().equals(password.trim())) {
+                user.setActive(true);
+                userReturn = user;
+            }
+        }
+        return userReturn;
+    }
+
+    public User checkIsActive() {
+        for (User user : listUser) {
+            if (user.isActive()) {
+                return user;
+            }
+        }
+        return null;
     }
 }

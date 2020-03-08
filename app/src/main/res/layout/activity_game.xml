@@ -1,21 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/listView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".GameActivity">
+    android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listViewDynamic"
-        android:layout_width="351dp"
-        android:layout_height="183dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageViewCardPC1"
+        android:layout_width="115dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/buttonPurchase"
+        android:layout_width="99dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="35dp"
+        android:onClick="actionButtonHold"
+        android:text="Hint"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
+        app:layout_constraintStart_toEndOf="@+id/buttonStop" />
+
+    <Button
+        android:id="@+id/buttonStop"
+        android:layout_width="97dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="32dp"
+        android:text="Stand"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPurchase" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="16dp"
+        android:text="Scoreboard"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="31dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="Win:"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="22dp"
+        android:text="Loss:"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewCardPC2"
+        android:layout_width="120dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageViewCardPC1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textViewContadorVitoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="12dp"
+        android:text="0"
+        app:layout_constraintBottom_toTopOf="@+id/textViewContadorDerrota"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textViewContadorDerrota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="22dp"
+        android:text="0"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="119dp"
+        android:text="Sum of cards:"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSumCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="116dp"
+        android:text="0"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewCard3"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+    <ImageView
+        android:id="@+id/imageViewCard1"
+        android:layout_width="117dp"
+        android:layout_height="196dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStop"
+        app:layout_constraintVertical_bias="0.698"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCard2"
+        android:layout_width="122dp"
+        android:layout_height="196dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCard3"
+        android:layout_width="128dp"
+        android:layout_height="196dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewCard1"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCard4"
+        android:layout_width="130dp"
+        android:layout_height="198dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewCard2"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCard5"
+        android:layout_width="135dp"
+        android:layout_height="198dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
