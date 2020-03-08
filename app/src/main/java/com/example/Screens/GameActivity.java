@@ -130,7 +130,7 @@ public class GameActivity extends BasicMenuAcitivy {
         actionButtonHold(null);
 
 
-        //checkPlayerWin();
+        checkPlayerWin();
        setTextWinLoss();
     }
 
@@ -147,14 +147,14 @@ public class GameActivity extends BasicMenuAcitivy {
         if (resultGame == 0) {
             win++;
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+          //  listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
             Toast.makeText(this, "Voce fez BlackJack", Toast.LENGTH_LONG).show();
             Game.checkStand = false;
             restartGame();
         } else if (resultGame == 1) {
             loss++;
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+           // listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
 
             Toast.makeText(this, "Empate", Toast.LENGTH_LONG).show();
             Game.checkStand = false;
@@ -164,13 +164,13 @@ public class GameActivity extends BasicMenuAcitivy {
             loss++;
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
             Toast.makeText(this, "A mesa ganhou", Toast.LENGTH_SHORT).show();
-            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+         //   listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
             Game.checkStand = false;
             restartGame();
 
         } else if (resultGame == 3) {
 
-            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+         //   listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
             Toast.makeText(this, "Empate, voce e a mesa estouraram", Toast.LENGTH_SHORT).show();
             Game.checkStand = false;
@@ -178,7 +178,7 @@ public class GameActivity extends BasicMenuAcitivy {
         }
         else if(resultGame == 4){
             loss++;
-            listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+          //  listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
             Toast.makeText(this, "Voce estourou", Toast.LENGTH_SHORT).show();
             Game.checkStand = false;
@@ -192,6 +192,10 @@ public class GameActivity extends BasicMenuAcitivy {
         Intent it = new Intent(this, GameActivity.class);
         startActivity(it);
         finish();
+        listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+
+
+
     }
 
     public void actionStand(View view) {
