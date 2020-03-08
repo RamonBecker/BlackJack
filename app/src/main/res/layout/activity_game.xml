@@ -25,14 +25,15 @@
         android:onClick="actionButtonHold"
         android:text="Hint"
         app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
-        app:layout_constraintStart_toEndOf="@+id/buttonStop" />
+        app:layout_constraintStart_toEndOf="@+id/buttonStand" />
 
     <Button
-        android:id="@+id/buttonStop"
+        android:id="@+id/buttonStand"
         android:layout_width="97dp"
         android:layout_height="58dp"
         android:layout_marginBottom="32dp"
         android:text="Stand"
+        android:onClick="actionStand"
         app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
         app:layout_constraintEnd_toStartOf="@+id/buttonPurchase" />
 
@@ -43,21 +44,21 @@
         android:layout_marginStart="12dp"
         android:layout_marginBottom="16dp"
         android:text="Scoreboard"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWin"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewWin"
         android:layout_width="31dp"
         android:layout_height="25dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="4dp"
         android:text="Win:"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLoss"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewLoss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
@@ -86,7 +87,7 @@
         android:layout_marginBottom="12dp"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/textViewContadorDerrota"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        app:layout_constraintStart_toEndOf="@+id/textViewWin" />
 
     <TextView
         android:id="@+id/textViewContadorDerrota"
@@ -96,7 +97,7 @@
         android:layout_marginBottom="22dp"
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/textViewLoss" />
 
     <TextView
         android:id="@+id/textView6"
@@ -125,7 +126,7 @@
         android:layout_marginEnd="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStop"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStand"
         app:layout_constraintVertical_bias="0.698"
         app:srcCompat="@drawable/ic_launcher_background" />
 

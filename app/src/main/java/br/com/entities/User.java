@@ -102,6 +102,7 @@ public class User {
         this.loss = loss;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
@@ -109,6 +110,9 @@ public class User {
                 ", nameUser='" + nameUser + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", isActive=" + isActive +
+                ", win=" + win +
+                ", loss=" + loss +
                 '}';
     }
 }

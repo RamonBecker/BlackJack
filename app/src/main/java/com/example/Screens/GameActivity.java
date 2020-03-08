@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import br.com.entities.Game;
@@ -28,11 +26,12 @@ public class GameActivity extends BasicMenuAcitivy {
 
     TextView contWin, contLoss, contSumCards;
 
-    Button buttonHint;
+    Button buttonHint, buttonStand;
 
     private ArrayList<ImageView> listCards;
 
     private ArrayList<Integer> listIdCards;
+
     //Numbers of plays
     private int playsUser = 0;
     private int playsComputer = 0;
@@ -40,7 +39,10 @@ public class GameActivity extends BasicMenuAcitivy {
     private int contImageViewUser = 2;
     private int contImageViewComputer = 0;
 
+    private User user;
+
     private Game game;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -80,11 +82,12 @@ public class GameActivity extends BasicMenuAcitivy {
         setCardsImage();
 
         buttonHint = (Button) findViewById(R.id.buttonPurchase);
+        buttonStand = (Button) findViewById(R.id.buttonStand);
 
 
         StoreUser storeUser = StoreUser.getInstance();
 
-        User user = storeUser.checkIsActive();
+        user = storeUser.checkIsActive();
         getSupportActionBar().setTitle(user.getName());
 
 
@@ -110,50 +113,92 @@ public class GameActivity extends BasicMenuAcitivy {
 
         View view = null;
 
+        playComputer();
+
         actionButtonHold(null);
         actionButtonHold(null);
 
+        Log.i("ganhador", String.valueOf(game.resultGame(playsUser, playsComputer)));
+
+        setTextWinLoss();
     }
 
 
-    public void actionButtonHold(View view){
+    public void actionStand(View view) {
+        buttonHint.setEnabled(false);
+        Game.checkStand = true;
+
+        listCards.get(0).setVisibility(View.VISIBLE);
+        Log.i("USER:", String.valueOf(playsUser));
+        Log.i("PC:", String.valueOf(playsComputer));
+        Log.i("ganhador", String.valueOf(game.resultGame(playsUser, playsComputer)));
+        Log.i("user", user.toString());
+        setTextWinLoss();
+
+    }
+
+    private void setTextWinLoss(){
+        contLoss.setText(String.valueOf(user.getLoss()));
+        contWin.setText(String.valueOf(user.getWin()));
+    }
+
+
+    public void actionButtonHold(View view) {
 
         int id = game.generateCards();
-        //Log.i("id",String.valueOf(id));
 
-        for (int i = 0 ; i < listIdCards.size(); i++){
-             if(i == id){
+        for (int i = 0; i < listIdCards.size(); i++) {
+            if (i == id) {
                 listCards.get(contImageViewUser).setImageResource(listIdCards.get(i));
-             }
+            }
         }
 
-        if(id >= 10){
+        if (id >= 10) {
             playsUser += 10;
-        }else{
+        } else {
             playsUser += id + 1;
         }
 
         contImageViewUser++;
 
-        if(contImageViewUser == 8){
+        if (contImageViewUser == 8) {
             contImageViewUser = 3;
         }
 
         contSumCards.setText(String.valueOf(playsUser));
+        setTextWinLoss();
+        Log.i("ganhador", String.valueOf(game.resultGame(playsUser, playsComputer)));
     }
 
 
-    private void playComputer(){
+    private void playComputer() {
 
-        int id = game.generateCards();
-        Log.i("id",String.valueOf(id));
+        int id1 = game.generateCards();
+        int id2 = game.generateCards();
 
+        for (int i = 0; i < listIdCards.size(); i++) {
+            if (i == id2) {
+                listCards.get(1).setImageResource(listIdCards.get(i));
+            }
+        }
+
+        if (id1 >= 10) {
+            playsComputer += 10;
+        } else {
+            playsComputer += id1 + 1;
+        }
+
+        if (id2 >= 10) {
+            playsComputer += 10;
+        } else {
+            playsComputer += id2 + 1;
+        }
     }
 
     // Set Cards Computer and set cards user
-    private void setCardsImage(){
+    private void setCardsImage() {
 
-        for (ImageView img:listCards) {
+        for (ImageView img : listCards) {
             img.setImageResource(R.drawable.verso);
         }
     }
