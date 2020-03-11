@@ -6,22 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageViewCardPC1"
-        android:layout_width="115dp"
-        android:layout_height="169dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="44dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_launcher_background" />
-
     <Button
         android:id="@+id/buttonPurchase"
-        android:layout_width="99dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginBottom="35dp"
+        android:layout_width="78dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="32dp"
         android:onClick="actionButtonHold"
         android:text="Hint"
         app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
@@ -29,95 +19,72 @@
 
     <Button
         android:id="@+id/buttonStand"
-        android:layout_width="97dp"
-        android:layout_height="58dp"
+        android:layout_width="75dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="32dp"
-        android:text="Stand"
         android:onClick="actionStand"
+        android:text="Stand"
         app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
         app:layout_constraintEnd_toStartOf="@+id/buttonPurchase" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="16dp"
-        android:text="Scoreboard"
-        app:layout_constraintBottom_toTopOf="@+id/textViewWin"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewWin"
         android:layout_width="31dp"
         android:layout_height="25dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         android:text="Win:"
         app:layout_constraintBottom_toTopOf="@+id/textViewLoss"
+        app:layout_constraintEnd_toStartOf="@+id/textViewContadorVitoria" />
+
+    <TextView
+        android:id="@+id/textViewContadorVitoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="12dp"
+        android:text="0"
+        app:layout_constraintBottom_toTopOf="@+id/textViewContadorDerrota"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSumCards"
+        android:layout_width="44dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="13dp"
+        android:text="0"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPurchase"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textViewContadorDerrota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="69dp"
+        android:text="0"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewCard1"
+        app:layout_constraintStart_toEndOf="@+id/textViewLoss" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="88dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="9dp"
+        android:text="Sum of cards:"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPurchase"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewLoss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="67dp"
         android:text="Loss:"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageViewCardPC2"
-        android:layout_width="120dp"
-        android:layout_height="169dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="44dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageViewCardPC1"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_launcher_background" />
-
-    <TextView
-        android:id="@+id/textViewContadorVitoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginBottom="12dp"
-        android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/textViewContadorDerrota"
-        app:layout_constraintStart_toEndOf="@+id/textViewWin" />
-
-    <TextView
-        android:id="@+id/textViewContadorDerrota"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="22dp"
-        android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/textViewLoss" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="119dp"
-        android:text="Sum of cards:"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewSumCards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="116dp"
-        android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewCard3"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        app:layout_constraintBottom_toTopOf="@+id/imageViewCard2"
+        app:layout_constraintStart_toEndOf="@+id/buttonRestart" />
 
     <ImageView
         android:id="@+id/imageViewCard1"
@@ -128,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonStand"
         app:layout_constraintVertical_bias="0.698"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        tools:src="@drawable/ic_launcher_background" />
 
     <ImageView
         android:id="@+id/imageViewCard2"
@@ -138,7 +105,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        tools:src="@drawable/ic_launcher_background" />
 
     <ImageView
         android:id="@+id/imageViewCard3"
@@ -147,7 +114,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageViewCard1"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        tools:src="@drawable/ic_launcher_background" />
 
     <ImageView
         android:id="@+id/imageViewCard4"
@@ -156,7 +123,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageViewCard2"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        tools:src="@drawable/ic_launcher_background" />
 
     <ImageView
         android:id="@+id/imageViewCard5"
@@ -166,6 +133,67 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        tools:src="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCardPC5"
+        android:layout_width="117dp"
+        android:layout_height="171dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCardPC4"
+        android:layout_width="126dp"
+        android:layout_height="171dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewCardPC5"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCardPC3"
+        android:layout_width="126dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewCardPC4"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCardPC1"
+        android:layout_width="120dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <ImageView
+        android:id="@+id/imageViewCardPC2"
+        android:layout_width="115dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="72dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewCardPC3"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/buttonRestart"
+        android:layout_width="89dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="32dp"
+        android:text="Restart"
+        android:onClick="restartGame"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewCard4"
+        app:layout_constraintStart_toEndOf="@+id/buttonPurchase" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -179,11 +179,6 @@
           <properties class="br.com.entities.Game" method="checkStand" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/Screens/GameActivity.java</url>
-          <line>143</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

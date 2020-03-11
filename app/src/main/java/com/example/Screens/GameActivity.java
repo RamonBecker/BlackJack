@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.entities.Game;
 import br.com.entities.StoreUser;
@@ -19,7 +20,7 @@ public class GameActivity extends BasicMenuAcitivy {
 
 
     // Cards Computer
-    ImageView imgCardComputer1, imgCardComputer2, imgCardComputer3;
+    ImageView imgCardComputer1, imgCardComputer2, imgCardComputer3, imgCardComputer4, imgCardComputer5;
 
     //Cards User
     ImageView imgCardUser1, imgCardUser2, imgCardUser3, imgCardUser4, imgCardUser5;
@@ -39,9 +40,11 @@ public class GameActivity extends BasicMenuAcitivy {
 
 
     // Controller of indice image
-    private int contImageViewUser = 2;
+    private int contImageViewUser = 5;
     private int contImageViewComputer = 0;
 
+
+    private List<Integer> listIDComputer;
 
     // References
     private User user;
@@ -67,6 +70,9 @@ public class GameActivity extends BasicMenuAcitivy {
         //Cards Computer
         imgCardComputer1 = findViewById(R.id.imageViewCardPC1);
         imgCardComputer2 = findViewById(R.id.imageViewCardPC2);
+        imgCardComputer3 = findViewById(R.id.imageViewCardPC3);
+        imgCardComputer4 = findViewById(R.id.imageViewCardPC4);
+        imgCardComputer5 = findViewById(R.id.imageViewCardPC5);
 
 
         //Cards User
@@ -82,7 +88,9 @@ public class GameActivity extends BasicMenuAcitivy {
 
         listCards.add(imgCardComputer1);
         listCards.add(imgCardComputer2);
-
+        listCards.add(imgCardComputer3);
+        listCards.add(imgCardComputer4);
+        listCards.add(imgCardComputer5);
 
         listCards.add(imgCardUser1);
         listCards.add(imgCardUser2);
@@ -124,76 +132,90 @@ public class GameActivity extends BasicMenuAcitivy {
 
         View view = null;
 
-        playComputer();
+
+        listIDComputer = new ArrayList<>();
+
+        //playComputer();
 
         actionButtonHold(null);
         actionButtonHold(null);
 
 
         checkPlayerWin();
-       setTextWinLoss();
+        setTextWinLoss();
     }
 
 
     private void checkPlayerWin() {
         Game game = new Game();
 
-        Log.i("blackjack Jogodas:", "User:" + String.valueOf(playsUser) + " PC:" + String.valueOf(playsComputer));
+        Log.i("blackjack Jogadas:", "User:" + String.valueOf(playsUser) + " PC:" + String.valueOf(playsComputer));
 
-        Log.i("Retorno", "User:" + String.valueOf((game.resultGame(playsUser,playsComputer))));
-        int resultGame = game.resultGame(playsUser,playsComputer);
+        Log.i("Retorno", "User:" + String.valueOf((game.resultGame(playsUser, playsComputer))));
+        int resultGame = game.resultGame(playsUser, playsComputer);
         Log.i("Result", "User:" + String.valueOf(resultGame));
 
         if (resultGame == 0) {
             win++;
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-          //  listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+            //   listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
             Toast.makeText(this, "Voce fez BlackJack", Toast.LENGTH_LONG).show();
             Game.checkStand = false;
-            restartGame();
+            visibleCardComputer();
+          //  restartGame();
         } else if (resultGame == 1) {
-            loss++;
-            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-           // listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
 
+            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
             Toast.makeText(this, "Empate", Toast.LENGTH_LONG).show();
             Game.checkStand = false;
-            restartGame();
+
+            visibleCardComputer();
+
+            //restartGame();
         } else if (resultGame == 2) {
 
             loss++;
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
             Toast.makeText(this, "A mesa ganhou", Toast.LENGTH_SHORT).show();
-         //   listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+            //    listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
             Game.checkStand = false;
-            restartGame();
+
+            visibleCardComputer();
+
+          //  restartGame();
 
         } else if (resultGame == 3) {
 
-         //   listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+            // listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+
+
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
             Toast.makeText(this, "Empate, voce e a mesa estouraram", Toast.LENGTH_SHORT).show();
             Game.checkStand = false;
-            restartGame();
-        }
-        else if(resultGame == 4){
+
+            visibleCardComputer();
+         //   restartGame();
+        } else if (resultGame == 4) {
             loss++;
-          //  listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+            //   listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
+
+
             user = StoreUser.getInstance().updateWinLoss(user, win, loss);
             Toast.makeText(this, "Voce estourou", Toast.LENGTH_SHORT).show();
             Game.checkStand = false;
-            restartGame();
+
+            visibleCardComputer();
+          //  restartGame();
         }
 
     }
 
-    private void restartGame() {
+    public void restartGame(View view) {
 
         Intent it = new Intent(this, GameActivity.class);
         startActivity(it);
         finish();
         listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
-
 
 
     }
@@ -203,7 +225,7 @@ public class GameActivity extends BasicMenuAcitivy {
         buttonHint.setEnabled(false);
         Game.checkStand = true;
 
-        listCards.get(0).setVisibility(View.VISIBLE);
+        //listCards.get(0).setVisibility(View.VISIBLE);
 
 
         checkPlayerWin();
@@ -237,13 +259,13 @@ public class GameActivity extends BasicMenuAcitivy {
 
         contImageViewUser++;
 
-        if (contImageViewUser == 8) {
-            contImageViewUser = 3;
+        if (contImageViewUser == 9) {
+            contImageViewUser = 5;
         }
 
         contSumCards.setText(String.valueOf(playsUser));
 
-
+        playComputer();
         checkPlayerWin();
         setTextWinLoss();
 
@@ -254,25 +276,36 @@ public class GameActivity extends BasicMenuAcitivy {
     private void playComputer() {
 
         int id1 = game.generateCards();
-        int id2 = game.generateCards();
 
-        for (int i = 0; i < listIdCards.size(); i++) {
-            if (i == id2) {
-                listCards.get(1).setImageResource(listIdCards.get(i));
-            }
+        listIDComputer.add(id1);
+
+        Log.i("Gerador:", String.valueOf(id1));
+
+        if(contImageViewComputer == 0){
+            listCards.get(contImageViewComputer).setImageResource(listIdCards.get(id1));
         }
-        idImageComputerVisibleFinal = id1;
+
+        //      for (int i = 0; i < listIdCards.size(); i++) {
+        //  if (i == id1) {
+        //    listCards.get(contImageViewComputer).setImageResource(listIdCards.get(i));
+        //     }
+        //    }
+
+     //   if (contImageViewComputer >= 1) {
+      //      listCards.get(contImageViewComputer).setVisibility(View.INVISIBLE);
+     //   }
+
+        // idImageComputerVisibleFinal = id1;
+
+
         if (id1 >= 10) {
             playsComputer += 10;
         } else {
             playsComputer += id1 + 1;
         }
 
-        if (id2 >= 10) {
-            playsComputer += 10;
-        } else {
-            playsComputer += id2 + 1;
-        }
+        contImageViewComputer++;
+
     }
 
     // Set Cards Computer and set cards user
@@ -280,6 +313,18 @@ public class GameActivity extends BasicMenuAcitivy {
 
         for (ImageView img : listCards) {
             img.setImageResource(R.drawable.verso);
+        }
+    }
+
+    private void visibleCardComputer() {
+        int j = 0;
+        for (int i = 0; i < listIDComputer.size(); i++){
+            listCards.get(j).setImageResource(listIdCards.get(listIDComputer.get(i)));
+            j++;
+        }
+
+        for (int i= 0; i < 5; i++) {
+            listCards.get(i).setVisibility(View.VISIBLE);
         }
     }
 

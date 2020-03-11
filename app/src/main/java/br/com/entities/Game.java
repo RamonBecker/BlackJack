@@ -16,7 +16,7 @@ public class Game {
 
     public int generateCards() {
         random = new Random();
-        return random.nextInt(13);
+        return random.nextInt(12);
     }
 
     public int checkPlays(int playUser, int playComputer) {
@@ -67,10 +67,11 @@ public class Game {
         int result = 50;
         //
         if (checkStand) {
-            Log.i("check", String.valueOf(checkStand));
+          //  Log.i("check", String.valueOf(checkStand));
             result = checkStand(playUser, playComputer);
 
            Log.i("chechStand", "CheckStand");
+
             return result;
 
         }
