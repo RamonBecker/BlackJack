@@ -1,11 +1,6 @@
 package br.com.entities;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import com.example.Screens.GameActivity;
-import com.example.Screens.R;
-
 import java.util.Random;
 
 public class Game {
@@ -78,36 +73,5 @@ public class Game {
 
         result = checkPlays(playUser, playComputer);
         return result;
-           // Log.i("NochechStand", "NãoCheckStand");
-
-
-        //Log.i("result:", String.valueOf(result));
-/*
-
-        if (result == 0) {
-            //Toast.makeText(this, "Empate", Toast.LENGTH_SHORT).show();
-        }
-
-        if (result == 1) {
-            return "Empate";
-        }
-
-        if (result == 2) {
-            return "blackjack mesa";
-        }
-
-        if (result == 3) {
-            return "Empate";
-        }
-
-        if (result == 4) {
-            return "Voce estourou";
-        }
-
-
-        return "";
-
- */
-
     }
 }

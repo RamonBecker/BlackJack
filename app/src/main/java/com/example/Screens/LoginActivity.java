@@ -3,6 +3,7 @@ package com.example.Screens;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -55,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
             finish();
 
         } else {
+            txtPassword.setBackgroundTintList(ColorStateList.valueOf(-65536));
+            txtUserName.setBackgroundTintList(ColorStateList.valueOf(-65536));
             Toast.makeText(this, R.string.usuario_senha_invalidos, Toast.LENGTH_LONG).show();
         }
     }

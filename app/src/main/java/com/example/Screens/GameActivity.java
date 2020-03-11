@@ -157,57 +157,33 @@ public class GameActivity extends BasicMenuAcitivy {
 
         if (resultGame == 0) {
             win++;
-            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-            //   listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
-            Toast.makeText(this, "Voce fez BlackJack", Toast.LENGTH_LONG).show();
-            Game.checkStand = false;
+            msgWinLoss(getString(R.string.userBlackJack));
             visibleCardComputer();
-          //  restartGame();
         } else if (resultGame == 1) {
-
-            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-            Toast.makeText(this, "Empate", Toast.LENGTH_LONG).show();
-            Game.checkStand = false;
-
+            msgWinLoss(getString(R.string.empate));
             visibleCardComputer();
-
-            //restartGame();
         } else if (resultGame == 2) {
-
             loss++;
-            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-            Toast.makeText(this, "A mesa ganhou", Toast.LENGTH_SHORT).show();
-            //    listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
-            Game.checkStand = false;
-
+            msgWinLoss(getString(R.string.pcWin));
             visibleCardComputer();
-
-          //  restartGame();
 
         } else if (resultGame == 3) {
-
-            // listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
-
-
-            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-            Toast.makeText(this, "Empate, voce e a mesa estouraram", Toast.LENGTH_SHORT).show();
-            Game.checkStand = false;
-
+            msgWinLoss(getString(R.string.empatePCUserEstouraram));
             visibleCardComputer();
-         //   restartGame();
         } else if (resultGame == 4) {
             loss++;
-            //   listCards.get(0).setImageResource(listIdCards.get(idImageComputerVisibleFinal));
-
-
-            user = StoreUser.getInstance().updateWinLoss(user, win, loss);
-            Toast.makeText(this, "Voce estourou", Toast.LENGTH_SHORT).show();
-            Game.checkStand = false;
-
+            msgWinLoss(getString(R.string.voceEstourou));
             visibleCardComputer();
-          //  restartGame();
         }
 
+    }
+
+    private void msgWinLoss(String msg){
+        buttonHint.setEnabled(false);
+        buttonStand.setEnabled(false);
+        user = StoreUser.getInstance().updateWinLoss(user, win, loss);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Game.checkStand = false;
     }
 
     public void restartGame(View view) {
@@ -224,9 +200,6 @@ public class GameActivity extends BasicMenuAcitivy {
 
         buttonHint.setEnabled(false);
         Game.checkStand = true;
-
-        //listCards.get(0).setVisibility(View.VISIBLE);
-
 
         checkPlayerWin();
         setTextWinLoss();
@@ -269,7 +242,6 @@ public class GameActivity extends BasicMenuAcitivy {
         checkPlayerWin();
         setTextWinLoss();
 
-        //Log.i("ganhador", String.valueOf(game.resultGame(playsUser, playsComputer)));
     }
 
 
@@ -279,24 +251,9 @@ public class GameActivity extends BasicMenuAcitivy {
 
         listIDComputer.add(id1);
 
-        Log.i("Gerador:", String.valueOf(id1));
-
         if(contImageViewComputer == 0){
             listCards.get(contImageViewComputer).setImageResource(listIdCards.get(id1));
         }
-
-        //      for (int i = 0; i < listIdCards.size(); i++) {
-        //  if (i == id1) {
-        //    listCards.get(contImageViewComputer).setImageResource(listIdCards.get(i));
-        //     }
-        //    }
-
-     //   if (contImageViewComputer >= 1) {
-      //      listCards.get(contImageViewComputer).setVisibility(View.INVISIBLE);
-     //   }
-
-        // idImageComputerVisibleFinal = id1;
-
 
         if (id1 >= 10) {
             playsComputer += 10;

@@ -175,7 +175,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/br/com/entities/Game.java</url>
-          <line>49</line>
+          <line>44</line>
           <properties class="br.com.entities.Game" method="checkStand" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
