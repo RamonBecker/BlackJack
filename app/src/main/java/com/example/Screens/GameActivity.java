@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import br.com.entities.Game;
 import br.com.entities.StoreUser;
@@ -56,6 +57,16 @@ public class GameActivity extends BasicMenuAcitivy {
     public static int loss = 0;
 
     private int idImageComputerVisibleFinal = 0;
+
+    private int sumAsUser = 0;
+
+    private int sumAsPC = 0;
+    private int sumAsPCCARD1 = 0;
+
+
+    private int sumCardsUser = 0;
+
+    private List<Integer> listAs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,35 +136,69 @@ public class GameActivity extends BasicMenuAcitivy {
         listIdCards.add(R.drawable.setedecopas);
         listIdCards.add(R.drawable.oitodecopas);
         listIdCards.add(R.drawable.novedeouros);
-        listIdCards.add(R.drawable.damadepaus);
         listIdCards.add(R.drawable.dezouros);
+        listIdCards.add(R.drawable.damadepaus);
         listIdCards.add(R.drawable.valetedepaus);
         listIdCards.add(R.drawable.reideespadas);
 
         View view = null;
-
+        listAs = new ArrayList<>();
 
         listIDComputer = new ArrayList<>();
 
-        //playComputer();
 
         actionButtonHold(null);
         actionButtonHold(null);
+        intialCard();
 
-
-        checkPlayerWin();
+        //   checkPlayerWin();
         setTextWinLoss();
     }
 
 
     private void checkPlayerWin() {
+
+
+        if (playsUser > 21) {
+            if (sumAsUser >= 1) {
+                for (int i = 0; i < sumAsUser; i++) {
+                    playsUser -= 10;
+                }
+                contSumCards.setText(String.valueOf(playsUser));
+                sumAsUser = 0;
+                return;
+            }
+        }
+
+
         Game game = new Game();
 
-        Log.i("blackjack Jogadas:", "User:" + String.valueOf(playsUser) + " PC:" + String.valueOf(playsComputer));
+        int resultGame = 50;
 
-        Log.i("Retorno", "User:" + String.valueOf((game.resultGame(playsUser, playsComputer))));
-        int resultGame = game.resultGame(playsUser, playsComputer);
-        Log.i("Result", "User:" + String.valueOf(resultGame));
+
+        if (Game.checkStand) {
+            playComputer();
+            resultGame = game.resultGame(playsUser, playsComputer);
+            //   Log.i("ResultGame", String.valueOf(resultGame));
+            Log.i("Caiu no stand:", "User:" + String.valueOf(playsUser) + " PC:" + String.valueOf(playsComputer));
+            resultGameWinLoss(resultGame);
+        }
+
+        if (playsUser == 21) {
+            playComputer();
+            resultGame = game.resultGame(playsUser, playsComputer);
+            Log.i("if igual a 21:", "User:" + String.valueOf(playsUser) + " PC:" + String.valueOf(playsComputer));
+            resultGameWinLoss(resultGame);
+        } else if (playsUser > 21) {
+            playComputer();
+            resultGame = game.resultGame(playsUser, playsComputer);
+
+            Log.i("if > 21:", "User:" + String.valueOf(playsUser) + " PC:" + String.valueOf(playsComputer));
+            resultGameWinLoss(resultGame);
+        }
+    }
+
+    private void resultGameWinLoss(int resultGame) {
 
         if (resultGame == 0) {
             win++;
@@ -168,6 +213,7 @@ public class GameActivity extends BasicMenuAcitivy {
             visibleCardComputer();
 
         } else if (resultGame == 3) {
+            loss++;
             msgWinLoss(getString(R.string.empatePCUserEstouraram));
             visibleCardComputer();
         } else if (resultGame == 4) {
@@ -178,12 +224,13 @@ public class GameActivity extends BasicMenuAcitivy {
 
     }
 
-    private void msgWinLoss(String msg){
+    private void msgWinLoss(String msg) {
         buttonHint.setEnabled(false);
         buttonStand.setEnabled(false);
         user = StoreUser.getInstance().updateWinLoss(user, win, loss);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         Game.checkStand = false;
+        setTextWinLoss();
     }
 
     public void restartGame(View view) {
@@ -218,52 +265,174 @@ public class GameActivity extends BasicMenuAcitivy {
 
         int id = game.generateCards();
 
+
         for (int i = 0; i < listIdCards.size(); i++) {
             if (i == id) {
                 listCards.get(contImageViewUser).setImageResource(listIdCards.get(i));
             }
         }
 
+        int valorCarta = 0;
+
         if (id >= 10) {
-            playsUser += 10;
+            valorCarta += 10;
         } else {
-            playsUser += id + 1;
+            valorCarta = id + 1;
         }
+
+        if (id == 0) {
+            valorCarta = 11;
+            sumAsUser++;
+        }
+
+        playsUser += valorCarta;
+
+        /*
+        if (sumAsUser == 1) {
+            playsUser += valorCarta + 10;
+
+            if (playsUser > 21) {
+                if (sumAsUser >= 1) {
+                    playsUser -= 10;
+                    sumAsUser = 0;
+                }
+            }
+
+        } else {
+            if (playsUser > 21) {
+                if (sumAsUser >= 1) {
+                    playsUser -= 10;
+                    sumAsUser = 0;
+                } else {
+                    playsUser += valorCarta;
+                }
+            } else {
+                playsUser += valorCarta;
+            }
+        }
+
+*/
 
         contImageViewUser++;
 
-        if (contImageViewUser == 9) {
+        if (contImageViewUser == 10) {
             contImageViewUser = 5;
         }
-
         contSumCards.setText(String.valueOf(playsUser));
-
-        playComputer();
         checkPlayerWin();
-        setTextWinLoss();
+    }
 
+    private void intialCard() {
+        int id1 = game.generateCards();
+        listIDComputer.add(id1);
+
+        if (contImageViewComputer == 0) {
+            listCards.get(contImageViewComputer).setImageResource(listIdCards.get(id1));
+
+        }
+        int valorCarta = 0;
+
+        if (id1 >= 10) {
+            valorCarta = 10;
+        } else {
+            valorCarta = id1 + 1;
+        }
+
+        if (id1 == 0) {
+            playsComputer += valorCarta + 10;
+            sumAsPCCARD1++;
+        } else {
+            playsComputer += valorCarta;
+        }
+
+        contImageViewComputer++;
     }
 
 
     private void playComputer() {
 
-        int id1 = game.generateCards();
+        Random jogadasPC = new Random();
 
-        listIDComputer.add(id1);
+        int jogadas = jogadasPC.nextInt(5);
 
-        if(contImageViewComputer == 0){
-            listCards.get(contImageViewComputer).setImageResource(listIdCards.get(id1));
+        Log.i("jogadas", String.valueOf(jogadas));
+
+
+        if (jogadas == 0) {
+            jogadas++;
         }
 
-        if (id1 >= 10) {
-            playsComputer += 10;
-        } else {
-            playsComputer += id1 + 1;
+        int valorCarta = 0;
+
+        for (int i = 0; i < jogadas; i++) {
+
+            int id2 = game.generateCards();
+
+            listIDComputer.add(id2);
+            if (id2 >= 10) {
+                valorCarta = 10;
+            } else {
+                valorCarta = id2 + 1;
+            }
+
+            if (id2 == 0) {
+                valorCarta = 11;
+                sumAsPC++;
+            }
+
+            playsComputer += valorCarta;
+            /*
+            if (sumAsPC == 1) {
+                playsComputer += valorCarta + 10;
+                if (playsComputer > 21) {
+                    if (sumAsPC >= 1) {
+                        playsComputer -= 10;
+                        sumAsPC = 0;
+                    }
+                }
+            } else {
+                if (playsComputer > 21) {
+                    if (sumAsPC >= 1) {
+                        playsComputer -= 10;
+                        sumAsPC = 0;
+                    } else {
+                        playsComputer += valorCarta;
+                    }
+                } else {
+                    playsComputer += valorCarta;
+                }
+            }
+
+            if (sumAsPCCARD1 == 1) {
+                if (playsComputer > 21) {
+                    playsComputer -= 10;
+                    sumAsPCCARD1 = 0;
+                }
+            }
+
+             */
+
+            contImageViewComputer++;
+            Log.i("Soma das cartas:", String.valueOf(playsComputer));
+            if (playsComputer >= 17) {
+                break;
+            }
+
         }
 
-        contImageViewComputer++;
+        if (playsComputer > 21) {
+            sumAsPC += sumAsPCCARD1;
+            if (sumAsPC >= 1) {
+                for (int i = 0; i < sumAsPC; i++) {
+                    playsComputer -= 10;
+                }
+            }
+        }
+
+        Log.i("teste AS PC", String.valueOf(sumAsPC));
 
     }
+
 
     // Set Cards Computer and set cards user
     private void setCardsImage() {
@@ -275,12 +444,12 @@ public class GameActivity extends BasicMenuAcitivy {
 
     private void visibleCardComputer() {
         int j = 0;
-        for (int i = 0; i < listIDComputer.size(); i++){
+        for (int i = 0; i < listIDComputer.size(); i++) {
             listCards.get(j).setImageResource(listIdCards.get(listIDComputer.get(i)));
             j++;
         }
 
-        for (int i= 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             listCards.get(i).setVisibility(View.VISIBLE);
         }
     }

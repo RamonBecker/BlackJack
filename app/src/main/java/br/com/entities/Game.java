@@ -1,6 +1,7 @@
 package br.com.entities;
 
 import android.util.Log;
+
 import java.util.Random;
 
 public class Game {
@@ -48,9 +49,11 @@ public class Game {
         if (playUser < 21 && playComputer < 21) {
             if (playUser > playComputer) {
                 result = 0;
-            } else if (playComputer == playUser) {
+            }
+            if (playComputer == playUser) {
                 result = 1;
-            } else if(playComputer > playUser){
+            }
+            if (playComputer > playUser) {
                 result = 2;
             }
 
@@ -62,13 +65,12 @@ public class Game {
         int result = 50;
         //
         if (checkStand) {
-          //  Log.i("check", String.valueOf(checkStand));
             result = checkStand(playUser, playComputer);
-
-           Log.i("chechStand", "CheckStand");
-
+            if (result == 40) {
+                result = checkPlays(playUser, playComputer);
+            }
+            Log.i("chechStand", "CheckStand");
             return result;
-
         }
 
         result = checkPlays(playUser, playComputer);

@@ -1,16 +1,14 @@
 package com.example.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import br.com.entities.StoreUser;
-import br.com.entities.User;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void actionButtonLogin(View view) {
         StoreUser storeUser = StoreUser.getInstance();
-
 
         //storeUser.addUser(new User("admin", "admin", "admin", "admin"));
         String nameUser = txtUserName.getText().toString();

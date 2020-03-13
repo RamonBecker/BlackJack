@@ -25,9 +25,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="todo">TODO</string>
     <string name="winUser">Voce fez Black Jack</string>
-    <string name="voceEstourou">Voce estourou</string>
-    <string name="empatePCUserEstouraram">Empate, voce e a mesa esouraram</string>
-    <string name="pcWin">A mesa ganhou</string>
+    <string name="voceEstourou">Voce perdeu, estourou</string>
+    <string name="empatePCUserEstouraram">Empate, voce e a mesa estouraram</string>
+    <string name="pcWin">O computador ganhou</string>
     <string name="empate">Empate</string>
     <string name="userBlackJack">Voce fez BlackJack</string>
 </resources>
